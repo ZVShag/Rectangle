@@ -44,20 +44,40 @@ public:
     {
 
     }
+    double Min_len_square(double x, double y, double z)
+    {
+        if ((x > y) && (x > z))
+            return y * z;
+        if ((x < y) && (y > z))
+            return x * z;
+        if ((z > x) && (y < z))
+            return y * x;
+    }
+
     double Square()
     {
-        a.Len_storona(b)* b.Len_storona(c);
+        double x= a.Len_storona(b);
+        double y=a.Len_storona(d);
+        double z=a.Len_storona(c);
+        return (Min_len_square(x, y, z));
+
+
     }
    
 
 
 };
-struct lst
+struct Lst
 {
     Point<int> p;
     Point<int>* next;
-
+    Lst(Point<int> a)
+    {
+        p = a;
+        next = nullptr;
+    }
 };
+
 
 int main()
 {
