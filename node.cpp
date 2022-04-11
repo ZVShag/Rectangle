@@ -23,6 +23,18 @@ public:
         return pow(pow(x - pt.x, 2) + pow(y - pt.y, 2), 0.5);
 
     }
+    void Print()
+    {
+        cout << this->x << "\t" << this->y << endl;
+    }
+    int Get_X()
+    {
+        return x;
+    }
+    int Get_Y()
+    {
+        return y;
+    }
 };
 template<typename Z>
 class Rect
@@ -70,11 +82,51 @@ public:
 struct Lst
 {
     Point<int> p;
-    Point<int>* next;
+    Lst* next;
+    Lst(){}
+  
     Lst(Point<int> a)
     {
         p = a;
         next = nullptr;
+    }
+};
+class Lst_Tree
+{
+    Lst* dot;
+
+public:
+    Lst_Tree()
+    {
+        dot = NULL;
+        
+    }
+    void AddLst(Point<int> d)
+    {
+        Lst* nd = new Lst; 
+
+        nd->p=d;        
+        nd->next = NULL;     
+
+        if (dot == NULL)     
+            dot = nd;
+        else                 
+        {
+            Lst* current = dot;
+            while (current->next != NULL)
+                current = current->next;
+            current->next = nd;
+        }
+    }
+    void PrintLst()
+    {
+        Lst* current = dot;
+
+        while (current != NULL)
+        {
+            current->p.Print();
+            current = current->next;
+        }
     }
 };
 
@@ -82,9 +134,21 @@ struct Lst
 int main()
 {
     Point<int> a(3,2);
-    Rect<Point<int>> r(a,a,a,a);
-    Point<int> b(3, 5);
-    a.Len_storona(b);
+    Point<int> b(3, 7);
+    Point<int> c(10, 7);
+    Point<int> d(10, 2);
+    Rect<Point<int>> r(a,b,c,d);
+    Lst_Tree Lst;
+    for (int i = a.Get_X(); i <= c.Get_X(); i++)
+        for (int j = a.Get_Y(); j <= c.Get_Y(); j++)
+        {
+            Point<int> s(i, j);
+            Lst.AddLst(s);
+        }
+    Lst.PrintLst();
+
+
+    
     
 }
 
