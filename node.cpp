@@ -133,12 +133,15 @@ public:
 
 int main()
 {
+
     Point<int> a(3,2);
     Point<int> b(3, 7);
     Point<int> c(10, 7);
     Point<int> d(10, 2);
     Rect<Point<int>> r(a,b,c,d);
+
     Lst_Tree Lst;
+
     for (int i = a.Get_X(); i <= c.Get_X(); i++)
         for (int j = a.Get_Y(); j <= c.Get_Y(); j++)
         {
