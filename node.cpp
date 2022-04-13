@@ -17,6 +17,11 @@ public:
         x = other_x;
         y = other_y;
     }
+    void Pointer(Point<int> d)
+    {
+        x = d.x;
+        y = d.y;
+    }
     double Len_storona(Point pt)
     {
        
@@ -43,14 +48,19 @@ class Rect
     Point<int> b;
     Point<int> c;
     Point<int> d;
+    
 public:
-    Rect() { a = 0; b = 0; c = 0; d = 0; }
+    Point<int> dig1;
+    Point<int> dig2;
+    Rect() { a = 0; b = 0; c = 0; d = 0; dig1 = 0; dig2 = 0; }
     Rect(Z x, Z y, Z z, Z w)
     {
         a = x;
         b = y;
         c = z;
         d = w;
+    
+        
     }
     void Perimetr()
     {
@@ -59,11 +69,23 @@ public:
     double Min_len_square(double x, double y, double z)
     {
         if ((x > y) && (x > z))
+        {
+            dig1.Pointer(a);
+            dig2.Pointer(b);
             return y * z;
+        }
         if ((x < y) && (y > z))
+        {
+            dig1.Pointer(a);
+            dig2.Pointer(d);
             return x * z;
+        }
         if ((z > x) && (y < z))
+        {
+            dig1.Pointer(a);
+            dig2.Pointer(c);
             return y * x;
+        }
     }
 
     double Square()
@@ -72,6 +94,7 @@ public:
         double y=a.Len_storona(d);
         double z=a.Len_storona(c);
         return (Min_len_square(x, y, z));
+
 
 
     }
@@ -139,11 +162,14 @@ int main()
     Point<int> c(10, 7);
     Point<int> d(10, 2);
     Rect<Point<int>> r(a,b,c,d);
-
+    r.Square();
+    r.dig1.Print();
+    r.dig2.Print();
+  
     Lst_Tree Lst;
 
-    for (int i = a.Get_X(); i <= c.Get_X(); i++)
-        for (int j = a.Get_Y(); j <= c.Get_Y(); j++)
+    for (int i = r.dig1.Get_X(); i <= r.dig2.Get_X(); i++)
+        for (int j = r.dig1.Get_Y(); j <= r.dig2.Get_Y(); j++)
         {
             Point<int> s(i, j);
             Lst.AddLst(s);
